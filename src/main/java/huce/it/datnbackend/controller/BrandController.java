@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
-@RequestMapping("/brand")
+//@RequestMapping("/brand")
 public class BrandController {
 
     private List<String> errors = new ArrayList<>();
@@ -50,6 +50,15 @@ public class BrandController {
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);
         return "/admin/brand_list";
+    }
+
+    @RequestMapping("/manager_brand_test")
+    public String showBrandManagerPageTest(Model model,
+                                       HttpSession session){
+        model.addAttribute("brands",brandService.getAll());
+//        model.addAttribute("user",session.getAttribute("user"));
+        sentError(model);
+        return "/admin/tables";
     }
 
     @RequestMapping("/manager_add_brand")
