@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/product")
+//@RequestMapping("/product")
 public class ProductController {
     private List<String> errors = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class ProductController {
     @Autowired
     private IBrandService brandService;
 
-    @RequestMapping("/manager_product")
+    @RequestMapping("/manage_product")
     public String showProductManagerPage(Model model,
                                        HttpSession session){
         model.addAttribute("products",productService.getAll());
@@ -38,7 +38,7 @@ public class ProductController {
         return "/brand/product_list";
     }
 
-    @RequestMapping("/manager_add_product")
+    @RequestMapping("/manage_add_product")
     public String addProductManagerPage(Model model,
                                       HttpSession session){
         model.addAttribute("productcates",productCategoryService.getAll());
@@ -60,7 +60,7 @@ public class ProductController {
             product.setStatus(1);
             productService.insertObject(product);
         }
-        return "redirect:/product/manager_product";
+        return "redirect:/manage_product";
     }
 
     @RequestMapping("/update_product")
@@ -72,7 +72,7 @@ public class ProductController {
         model.addAttribute("brands",brandService.getAll());
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);
-        return "brand/product_info";
+        return "/brand/product_info";
 
     }
 
@@ -81,7 +81,7 @@ public class ProductController {
         if(validateDelete(productId)){
             productService.deleteObject(productId);
         }
-        return "redirect:/product/manager_product";
+        return "redirect:/manage_product";
     }
 
     private boolean validateDelete(int productId){

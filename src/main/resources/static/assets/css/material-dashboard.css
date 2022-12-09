@@ -6550,6 +6550,10 @@ button.bg-dark:focus {
   border-left: 0 !important;
 }
 
+.border-cus {
+  border-color: #8e24aa !important;
+}
+
 .border-primary {
   border-color: #2196f3 !important;
 }
