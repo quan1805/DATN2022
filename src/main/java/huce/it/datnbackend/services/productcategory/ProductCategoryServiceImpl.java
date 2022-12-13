@@ -2,6 +2,7 @@ package huce.it.datnbackend.services.productcategory;
 
 import huce.it.datnbackend.model.BrandEntity;
 import huce.it.datnbackend.model.ProductCategoryEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.ProductCategoryRepository;
 import huce.it.datnbackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class ProductCategoryServiceImpl implements IProductCategoryService{
         productCategoryEntity.setStatus(0);
         repository.save(productCategoryEntity);
         return 200;
+    }
+
+    @Override
+    public Paged<ProductCategoryEntity> getPage(int pageNumber) {
+        return null;
     }
 }

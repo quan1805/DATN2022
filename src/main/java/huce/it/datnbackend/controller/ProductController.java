@@ -30,9 +30,10 @@ public class ProductController {
     private IBrandService brandService;
 
     @RequestMapping("/manage_product")
-    public String showProductManagerPage(Model model,
+    public String showProductManagerPage(@RequestParam(value = "pageNumber",required = false, defaultValue = "1")  int pageNumber,
+                                        Model model,
                                        HttpSession session){
-        model.addAttribute("products",productService.getAll());
+        model.addAttribute("products",productService.getPage(pageNumber));
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);
         return "/brand/product_list";

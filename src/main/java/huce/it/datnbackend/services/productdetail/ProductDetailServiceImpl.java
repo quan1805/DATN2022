@@ -2,9 +2,13 @@ package huce.it.datnbackend.services.productdetail;
 
 import huce.it.datnbackend.model.ProductDetailEntity;
 import huce.it.datnbackend.model.ProductEntity;
+import huce.it.datnbackend.paging.Paged;
+import huce.it.datnbackend.paging.Paging;
 import huce.it.datnbackend.repository.ProductDetailRepository;
 import huce.it.datnbackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +49,10 @@ public class ProductDetailServiceImpl implements IProductDetailService {
         productDetailEntity.setStatus(0);
         repository.save(productDetailEntity);
         return 200;
+    }
+
+    @Override
+    public Paged<ProductDetailEntity> getPage(int pageNumber) {
+        return null;
     }
 }

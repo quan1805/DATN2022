@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.order;
 
 import huce.it.datnbackend.model.OrderEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.services.IFunctionService;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface IOrderService extends IFunctionService<OrderEntity> {
 
     @Override
     int deleteObject(int id);
+
+    @Override
+    Paged<OrderEntity> getPage(int pageNumber);
 }

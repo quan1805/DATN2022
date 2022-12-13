@@ -1,5 +1,7 @@
 package huce.it.datnbackend.services;
 
+import huce.it.datnbackend.paging.Paged;
+
 import java.util.List;
 
 public interface IFunctionService<E> {
@@ -12,4 +14,7 @@ public interface IFunctionService<E> {
     int updateObject(E e);
 
     int deleteObject(int id);
+
+    Paged<E> getPage(int pageNumber);
+
 }

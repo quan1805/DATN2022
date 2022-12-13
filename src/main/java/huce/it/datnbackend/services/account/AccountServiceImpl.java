@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.account;
 
 import huce.it.datnbackend.model.AccountEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,10 @@ public class AccountServiceImpl implements IAccountService {
         accountEntity.setStatus(0);
         repository.save(accountEntity);
         return 200;
+    }
+
+    @Override
+    public Paged<AccountEntity> getPage(int pageNumber) {
+        return null;
     }
 }

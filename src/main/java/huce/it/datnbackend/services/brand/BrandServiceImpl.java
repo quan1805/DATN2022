@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.brand;
 
 import huce.it.datnbackend.model.BrandEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,10 @@ public class BrandServiceImpl implements IBrandService{
         brandEntity.setStatus(0);
         repository.save(brandEntity);
         return 200;
+    }
+
+    @Override
+    public Paged<BrandEntity> getPage(int pageNumber) {
+        return null;
     }
 }

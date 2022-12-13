@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.order;
 
 import huce.it.datnbackend.model.OrderEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,5 +35,10 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     public int deleteObject(int id) {
         return 0;
+    }
+
+    @Override
+    public Paged<OrderEntity> getPage(int pageNumber) {
+        return null;
     }
 }

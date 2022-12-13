@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.customer;
 
 import huce.it.datnbackend.model.CustomerEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.services.IFunctionService;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface ICustomerService extends IFunctionService<CustomerEntity> {
 
     @Override
     int deleteObject(int id);
+
+    @Override
+    Paged<CustomerEntity> getPage(int pageNumber);
 }

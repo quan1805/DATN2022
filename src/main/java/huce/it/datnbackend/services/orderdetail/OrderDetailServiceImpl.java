@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.orderdetail;
 
 import huce.it.datnbackend.model.OrderDetailEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.OrderDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,5 +35,10 @@ public class OrderDetailServiceImpl implements IOrderDetailService{
     @Override
     public int deleteObject(int id) {
         return 0;
+    }
+
+    @Override
+    public Paged<OrderDetailEntity> getPage(int pageNumber) {
+        return null;
     }
 }

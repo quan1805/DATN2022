@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.productdetail;
 
 import huce.it.datnbackend.model.ProductDetailEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.services.IFunctionService;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface IProductDetailService extends IFunctionService<ProductDetailEnt
 
     @Override
     int deleteObject(int id);
+
+    @Override
+    Paged<ProductDetailEntity> getPage(int pageNumber);
 }

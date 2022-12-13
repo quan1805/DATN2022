@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.productcategory;
 
 import huce.it.datnbackend.model.ProductCategoryEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.services.IFunctionService;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface IProductCategoryService extends IFunctionService<ProductCategor
 
     @Override
     int deleteObject(int id);
+
+    @Override
+    Paged<ProductCategoryEntity> getPage(int pageNumber);
 }

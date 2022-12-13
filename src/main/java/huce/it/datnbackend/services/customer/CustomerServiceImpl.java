@@ -1,6 +1,7 @@
 package huce.it.datnbackend.services.customer;
 
 import huce.it.datnbackend.model.CustomerEntity;
+import huce.it.datnbackend.paging.Paged;
 import huce.it.datnbackend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class CustomerServiceImpl implements ICustomerService{
         customerEntity.setStatus(0);
         repository.save(customerEntity);
         return 200;
+    }
+
+    @Override
+    public Paged<CustomerEntity> getPage(int pageNumber) {
+        return null;
     }
 }
