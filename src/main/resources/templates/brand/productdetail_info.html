@@ -169,7 +169,7 @@
                 </div>
                 <div class="card-body">
                   <form th:action="@{/save_productdetail_action}" method="post">
-                    <input type="hidden" th:value="${productdetail.productid}" name = "productid">
+                    <input type="hidden" th:value="${productdetail.product.id}" name = "product">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">

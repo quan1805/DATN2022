@@ -155,66 +155,40 @@
                   <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                  <form th:action="@{/save_product_action}" method="post">
+                  <form th:action="@{/save_productdetail_action}" method="post">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Brand ID</label>
-                          <input type="text" class="form-control" name="brandId" required>
+                          <label class="bmd-label-floating">Size</label>
+                          <input type="text" class="form-control" name="size" required>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Product name</label>
-                          <input type="text" class="form-control" name="name" required>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Image</label>
-                          <input type="text" class="form-control" name="image" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Quantity</label>
                           <input type="text" class="form-control" name="quantity" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Hot</label>
-                          <input type="text" class="form-control" name="hot" required>
-                        </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="">Product Category</label>
-                          <select name="cateId" class="form-select mt-3 w-100 text-center rounded border border-cus border-2" >
-                              <option th:each="productcate : ${productcates}"
-                                      th:value="${productcate.id}"
-                                      th:text="${productcate.name}"/>
-                          </select>
+                          <label class="bmd-label-floating">Price</label>
+                          <input type="text" class="form-control" name="Price" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Promotion Price</label>
+                          <input type="text" class="form-control" name="promotionPrice" required>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Create Date</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Update Date</label>
-                          <input type="text" class="form-control">
+                          <label class="bmd-label-floating">Product</label>
+                          <input type="text" class="form-control" th:value="${product.id}" name="product" required>
                         </div>
                       </div>
                     </div>

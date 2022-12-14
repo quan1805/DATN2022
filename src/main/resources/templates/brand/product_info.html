@@ -169,7 +169,7 @@
                 </div>
                 <div class="card-body">
                   <form th:action="@{/save_product_action}" method="post">
-                    <input type="hidden" th:value="${product.brandId}" name = "brandId">
+                    <input type="hidden" th:value="${product.brand.id}" name = "brand">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
@@ -208,7 +208,7 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Product Category</label>
-                          <input type="text" class="form-control" name = "cateId" th:value="${product.cateId}">
+                          <input type="text" class="form-control" name = "category" th:value="${product.category.id}">
                         </div>
                       </div>
                     </div>
@@ -252,7 +252,7 @@
                         <p class="card-category"> Here is a subtitle for this table</p>
                       </div>
                       <div class="col-md-8 text-right">
-                        <a href = "/manage_add_productdetail" class="btn btn-success"><i class="material-icons">&#xE147;</i></a>
+                        <a th:href = "@{'/manage_add_productdetail'(productId=${product.id})}" class="btn btn-success"><i class="material-icons">&#xE147;</i></a>
                       </div>
                     </div>
                   </div>

@@ -2,6 +2,7 @@ package huce.it.datnbackend.controller;
 
 
 import huce.it.datnbackend.model.ProductDetailEntity;
+import huce.it.datnbackend.services.product.IProductService;
 import huce.it.datnbackend.services.productdetail.IProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class ProductDetailController {
     private List<String> errors = new ArrayList<>();
 
     @Autowired
+    IProductService productService;
+
+    @Autowired
     IProductDetailService productDetailService;
 
     @RequestMapping("/manage_productdetail")
@@ -35,10 +39,12 @@ public class ProductDetailController {
     }
 
     @RequestMapping("/manage_add_productdetail")
-    public String addProductDetailManagerPage(Model model,
-                                        HttpSession session){
+    public String addProductDetailManagerPage(@RequestParam("productId")int productId,
+                                              Model model,
+                                              HttpSession session){
 //        model.addAttribute("brands",brandService.getAll());
 //        model.addAttribute("user",session.getAttribute("user"));
+        model.addAttribute("product", productService.getObjectById(productId));
         sentError(model);
         return "/brand/productdetail_add";
     }
@@ -54,7 +60,7 @@ public class ProductDetailController {
             productDetail.setStatus(1);
             productDetailService.insertObject(productDetail);
         }
-        return "redirect:/update_product?productId=" + productDetail.getProductid();
+        return "redirect:/update_product?productId=" + productDetail.getProduct().getId();
     }
 
     @RequestMapping("/update_productdetail")

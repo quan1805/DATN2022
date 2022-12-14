@@ -18,8 +18,9 @@ public class ProductDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "productid")
-    private int productid;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
 
     @Column(name = "price")
     private Double price;

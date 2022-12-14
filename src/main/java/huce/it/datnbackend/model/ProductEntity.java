@@ -17,6 +17,14 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "cate_id")
+    private ProductCategoryEntity category;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brand;
+
     @Column(name = "name")
     private String name;
 
@@ -31,12 +39,6 @@ public class ProductEntity {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "cateid")
-    private int cateId;
-
-    @Column(name = "brandid")
-    private int brandId;
 
     @Column(name = "createdate")
     private Timestamp createDate;
