@@ -45,7 +45,7 @@ public class CoreController {
             case "ROLE_ADMIN":
                 return "redirect:/admin/home";
             case "ROLE_MANAGER":
-                return "redirect:/manager/home";
+                return "redirect:/manage_product";
             case "ROLE_CUSTOMER":
                 return "redirect:/customer/home";
         }

@@ -52,16 +52,16 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item active ">
+          <li class="nav-item ">
             <a class="nav-link" href="./product_info.html">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
+          <li class="nav-item active ">
+            <a class="nav-link" href="/manage_product">
               <i class="material-icons">content_paste</i>
-              <p>Table List</p>
+              <p>Product</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -244,19 +244,49 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="#pablo">
-                    <img class="img" src="../assets/img/faces/marc.jpg" />
-                  </a>
-                </div>
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                      </div>
+                      <div class="col-md-8 text-right">
+                        <a href = "/manage_add_productdetail" class="btn btn-success"><i class="material-icons">&#xE147;</i></a>
+                      </div>
+                    </div>
+                  </div>
                 <div class="card-body">
-                  <h6 class="card-category">CEO / Co-Founder</h6>
-                  <h4 class="card-title">Alec Thompson</h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                      <th>ID</th>
+                      <th>Size</th>
+                      <th>Price</th>
+                      <th>Promotion Price</th>
+                      <th>Quantity</th>
+                      <th>Status</th>
+                      </thead>
+                      <tbody>
+                      <tr th:each="productdetail : ${productdetails}">
+                        <td th:utext="${productdetail.id}"></td>
+                        <td th:utext="${productdetail.size}"></td>
+                        <td th:utext="${productdetail.price}"></td>
+                        <td th:utext="${productdetail.promotionPrice}"></td>
+                        <td th:utext="${productdetail.quantity}"></td>
+                        <td th:utext="${productdetail.status}"></td>
+                        <td class="td-actions">
+                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-white btn-link btn-sm">
+                            <a th:href="@{'/update_productdetail'(productDetailId=${productdetail.id})}" class="edit" ><i class="material-icons">edit</i></a>
+                          </button>
+                          <button type="button" rel="tooltip" title="Remove" class="btn btn-white btn-link btn-sm">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

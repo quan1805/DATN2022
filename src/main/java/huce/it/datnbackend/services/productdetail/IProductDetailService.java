@@ -10,6 +10,8 @@ public interface IProductDetailService extends IFunctionService<ProductDetailEnt
     @Override
     List<ProductDetailEntity> getAll();
 
+    List<ProductDetailEntity> getObjectByProductId(int id);
+
     @Override
     ProductDetailEntity getObjectById(int id);
 

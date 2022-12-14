@@ -4,6 +4,7 @@ import huce.it.datnbackend.model.ProductEntity;
 import huce.it.datnbackend.services.brand.IBrandService;
 import huce.it.datnbackend.services.product.IProductService;
 import huce.it.datnbackend.services.productcategory.IProductCategoryService;
+import huce.it.datnbackend.services.productdetail.IProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class ProductController {
 
     @Autowired
     private IProductCategoryService productCategoryService;
+
+    @Autowired
+    private IProductDetailService productDetailService;
 
     @Autowired
     private IBrandService brandService;
@@ -65,11 +69,12 @@ public class ProductController {
     }
 
     @RequestMapping("/update_product")
-    public String showUpdateProductPage(@RequestParam("productId")int productId,
+    public String showUpdateProductPage(@RequestParam(value = "productId", required = false) int productId,
                                       Model model,
                                       HttpSession session){
         model.addAttribute("product",productService.getObjectById(productId));
         model.addAttribute("productcates",productCategoryService.getAll());
+        model.addAttribute("productdetails", productDetailService.getObjectByProductId(productId));
         model.addAttribute("brands",brandService.getAll());
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);

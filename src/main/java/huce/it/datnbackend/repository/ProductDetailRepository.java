@@ -13,4 +13,7 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetailEnti
     @Query("Select a from ProductDetailEntity a where a.status = 1")
     List<ProductDetailEntity> findAllActive();
 
+    @Query("Select p from ProductDetailEntity p where p.productid = ?1 ")
+    List<ProductDetailEntity> findAllByProductId(int productId);
+
 }

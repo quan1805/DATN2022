@@ -2,8 +2,6 @@ package huce.it.datnbackend.controller;
 
 
 import huce.it.datnbackend.model.ProductDetailEntity;
-import huce.it.datnbackend.model.ProductEntity;
-import huce.it.datnbackend.services.product.IProductService;
 import huce.it.datnbackend.services.productdetail.IProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,23 +18,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/productdetail")
+//@RequestMapping("/productdetail")
 public class ProductDetailController {
     private List<String> errors = new ArrayList<>();
 
     @Autowired
     IProductDetailService productDetailService;
 
-    @RequestMapping("/manager_productdetail")
+    @RequestMapping("/manage_productdetail")
     public String showProductDetailManagerPage(Model model,
                                          HttpSession session){
         model.addAttribute("productdetails",productDetailService.getAll());
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);
-        return "/brand/productdetail_list";
+        return "/brand/productdetail_list_t";
     }
 
-    @RequestMapping("/manager_add_productdetail")
+    @RequestMapping("/manage_add_productdetail")
     public String addProductDetailManagerPage(Model model,
                                         HttpSession session){
 //        model.addAttribute("brands",brandService.getAll());
@@ -56,7 +54,7 @@ public class ProductDetailController {
             productDetail.setStatus(1);
             productDetailService.insertObject(productDetail);
         }
-        return "redirect:/productdetail/manager_productdetail";
+        return "redirect:/update_product?productId=" + productDetail.getProductid();
     }
 
     @RequestMapping("/update_productdetail")
@@ -66,7 +64,7 @@ public class ProductDetailController {
         model.addAttribute("productdetail",productDetailService.getObjectById(productDetailId));
 //        model.addAttribute("user",session.getAttribute("user"));
         sentError(model);
-        return "brand/productdetail_info";
+        return "/brand/productdetail_info";
 
     }
 
@@ -75,7 +73,7 @@ public class ProductDetailController {
         if(validateDelete(productId)){
             productDetailService.deleteObject(productId);
         }
-        return "redirect:/productdetail/manager_productdetail";
+        return "redirect:/manage_productdetail";
     }
 
     private boolean validateDelete(int productDetailId){

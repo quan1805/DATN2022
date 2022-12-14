@@ -26,6 +26,11 @@ public class ProductDetailServiceImpl implements IProductDetailService {
     }
 
     @Override
+    public List<ProductDetailEntity> getObjectByProductId(int productId) {
+        return repository.findAllByProductId(productId);
+    }
+
+    @Override
     public ProductDetailEntity getObjectById(int id) {
         return repository.findById(id).get();
 

@@ -45,7 +45,7 @@
             </a>
           </li>
           <li class="nav-item active ">
-            <a class="nav-link" href="./product_list.html">
+            <a class="nav-link" href="/manage_product">
               <i class="material-icons">content_paste</i>
               <p>Product</p>
             </a>
@@ -233,15 +233,15 @@
               <nav aria-label="Page navigation example" class="pb-5 mb-5">
                 <ul class="pagination justify-content-center" th:if="${products.page.totalPages > 1}">
                   <li class="page-item" th:classappend="${!products.paging.isPrevEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'manege_product?pageNumber=1'}" >Đầu</a>
+                    <a class="page-link" th:href="@{'manage_product?pageNumber=1'}" >Đầu</a>
                   </li>
                   <li class="page-item" th:classappend="${!products.paging.isPrevEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'manege_product?pageNumber=' + ${products.paging.pageNumber - 1 > 0 ? products.paging.pageNumber - 1 : 1}}" >Trước</a>
+                    <a class="page-link" th:href="@{'manage_product?pageNumber=' + ${products.paging.pageNumber - 1 > 0 ? products.paging.pageNumber - 1 : 1}}" >Trước</a>
                   </li>
                   <th:block th:each="item : ${products.paging.getItems()}">
                     <li class="page-item" th:classappend="${item.index == products.paging.pageNumber? 'active' : ''}"
                         th:if="${item.pageItemType.name() == 'PAGE'}">
-                      <a class="page-link" th:href="@{'manege_product?pageNumber=' + ${item.index}}"
+                      <a class="page-link" th:href="@{'manage_product?pageNumber=' + ${item.index}}"
                          th:text="${item.index}"></a>
                     </li>
                     <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
@@ -249,10 +249,10 @@
                     </li>
                   </th:block>
                   <li class="page-item" th:classappend="${!products.paging.isNextEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'manege_product?pageNumber=' + ${products.paging.pageNumber + 1 <= products.page.totalPages ? products.paging.pageNumber + 1 : products.page.totalPages}}">Sau</a>
+                    <a class="page-link" th:href="@{'manage_product?pageNumber=' + ${products.paging.pageNumber + 1 <= products.page.totalPages ? products.paging.pageNumber + 1 : products.page.totalPages}}">Sau</a>
                   </li>
                   <li class="page-item" th:classappend="${!products.paging.isNextEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'manege_product?pageNumber=' + ${products.page.totalPages}}" >Cuối</a>
+                    <a class="page-link" th:href="@{'manage_product?pageNumber=' + ${products.page.totalPages}}" >Cuối</a>
                   </li>
                 </ul>
               </nav>
