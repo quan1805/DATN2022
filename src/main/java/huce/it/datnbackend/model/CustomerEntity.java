@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -41,5 +42,8 @@ public class CustomerEntity {
 
     @Column(name = "position")
     private int position;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+    private ShoppingCartEntity cart;
 
 }

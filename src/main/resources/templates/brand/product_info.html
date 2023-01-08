@@ -1,19 +1,5 @@
-<!--
-=========================================================
-* Material Dashboard Dark Edition - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-dark
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -162,13 +148,19 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Edit Profile</h4>
-                  <p class="card-category">Complete your profile</p>
+              <div class="card card-profile">
+                <div class="card-avatar" th:if="${images != null}" th:each="image : ${images}">
+                  <a href="#">
+                    <img class="img" th:src="@{${'/static/upload/' + product.getId() + '/' + image}}" />
+                  </a>
                 </div>
-                <div class="card-body">
+<!--                <div class="card-header card-header-primary">-->
+<!--                  <h4 class="card-title">Edit Profile</h4>-->
+<!--                  <p class="card-category">Complete your profile</p>-->
+<!--                </div>-->
+                <div class="card-body text-left">
                   <form th:action="@{/save_product_action}" method="post">
+                    <input type="hidden" th:value="${product.category.id}" name = "category">
                     <input type="hidden" th:value="${product.brand.id}" name = "brand">
                     <div class="row">
                       <div class="col-md-5">
@@ -186,7 +178,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Image</label>
-                          <input type="text" class="form-control" name="image" th:value="${product.image}" required>
+                          <input type="text" class="form-control" name="image" th:value="${product.image}">
                         </div>
                       </div>
                     </div>
@@ -208,7 +200,7 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Product Category</label>
-                          <input type="text" class="form-control" name = "category" th:value="${product.category.id}">
+                          <input type="text" class="form-control" th:value="${product.category.name}">
                         </div>
                       </div>
                     </div>

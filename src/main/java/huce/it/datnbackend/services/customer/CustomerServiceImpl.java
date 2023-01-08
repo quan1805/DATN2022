@@ -27,8 +27,7 @@ public class CustomerServiceImpl implements ICustomerService{
 
     @Override
     public int insertObject(CustomerEntity customerEntity) {
-        repository.save(customerEntity);
-        return 0;
+        return repository.save(customerEntity).getId();
     }
 
 

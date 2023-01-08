@@ -19,6 +19,19 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
     private UserDetailsServiceImpl userDetailsService;
 
 
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+//    }
+
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().
+//                withUser("user").password("{noop}password1").roles("ROLE_ADMIN")
+//                .and()
+//                .withUser("admin").password("{noop}password2").roles("ROLE_MANAGER");
+//    }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

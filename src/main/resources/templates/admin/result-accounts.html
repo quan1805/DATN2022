@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: header">
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+    <!-- Sidebar -->
+    <div th:replace="fragments :: sidebar"></div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:replace="fragments :: navbar" ></nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h4 class="card-title ">Account List</h4>
+<!--                      <p class="card-category"> Here is a subtitle for this table</p>-->
+                    </div>
+                    <div class="col-md-8  text-right">
+                      <div class = "row justify-content-end mr-0" >
+                        <form  style="margin-right: 1.25rem" th:action="@{/search-result-account/0}" method="get" class="navbar-form">
+                          <div class="input-group no-border">
+                            <input type="text" name="keyword" th:value="${keyword}" class="form-control" placeholder="Search account">
+                            <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                              <i class="material-icons">search</i>
+                              <div class="ripple-container"></div>
+                            </button>
+                          </div>
+                        </form>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">
+                          <span><i class="material-icons" style="margin-right:5px">&#xE147;</i></span>Add New Account</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                      <th>ID</th>
+                      <th>Username</th>
+<!--                      <th>Password</th>-->
+                      <th>Role</th>
+                      <th>Customer</th>
+                      <th>Brand</th>
+                      <th>Status</th>
+                      <th>Create Date</th>
+                      <th>Update Date</th>
+
+
+                      </thead>
+                      <tbody>
+                      <tr th:each="account : ${accounts}">
+                        <td th:utext="${account.id}"></td>
+                        <td th:utext="${account.username}"></td>
+<!--                        <td style="max-width: 200px" th:utext="${account.password}"></td>-->
+                        <td th:utext="${account.role}"></td>
+                        <td th:text="${account.getCustomer().name}"></td>
+                        <td th:text="${account.brand.name}"></td>
+                        <td>
+                          <button class="btn-warning" th:if="${account.status == 0}"> Ngừng hoạt động</button>
+                          <button class="btn-primary" th:if="${account.status == 1}"> Đang hoạt động</button>
+                        </td>
+                        <td th:utext="${account.createdDate}"></td>
+                        <td th:utext="${account.updatedDate}"></td>
+                        <td class="td-actions">
+                          <button type="button" rel="tooltip" title="Edit Account" class="btn btn-white btn-link btn-sm">
+                            <a id="editBtn" th:href="@{/findByAccountId/(id = ${account.id})}" class="edit" ><i class="material-icons">edit</i></a>
+                          </button>
+                          <button th:if="${account.status} == 1" type="button" rel="tooltip" title="Remove" class="btn btn-white btn-link btn-sm">
+                            <a id="deleteBtn" th:href="@{/delete-account/(id = ${account.id})}" ><i class="material-icons">close</i></a>
+                          </button>
+                          <button th:if="${account.status} == 0" type="button" rel="tooltip" title="Enable" class="btn btn-white btn-link btn-sm">
+                            <a id="enableBtn" th:href="@{/enable-account/(id = ${account.id})}" ><i class="material-icons">check</i></a>
+                          </button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li th:if = "${currentPage != 0}"  class="page-item">
+                          <a th:href="@{'/search-result-account/' + ${currentPage - 1}+'?keyword=' + ${keyword}}" class="page-link" href="#">Previous</a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+                          <a th:href="@{'/search-result-account/' + ${i - 1}+'?keyword=' + ${keyword}}" class="page-link" href="#"><span th:text="${i}"></span></a>
+                        </li>
+                        <li th:if="${currentPage + 1 != totalPages}" class="page-item">
+                          <a th:href="@{'/search-result-account/' + ${currentPage + 1}+'?keyword='+ ${keyword}}" class="page-link" href="#">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer th:replace="fragments :: footer"></footer>
+      <script>
+        const x = new Date().getFullYear();
+        let date = document.getElementById('date');
+        date.innerHTML = '&copy; ' + x + date.innerHTML;
+      </script>
+    </div>
+  </div>
+
+  <!-- Add Modal  -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/add-account}" method="post" th:object="${accountNew}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel" >Add New Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="recipient-name" style="top:-20px" class="col-form-label">User name:</label>
+              <input style="color:black" type="text" class="form-control" id="recipient-name" th:field="*{username}">
+            </div>
+          <div class="form-group">
+            <label for="recipient-password" style="top:-20px"  class="col-form-label">Password:</label>
+            <input style="color:black" type="text" class="form-control" id="recipient-password" th:field="*{password}">
+          </div>
+          <div class="form-group">
+            <label for="recipient-role" style="top:-20px"  class="col-form-label">Role:</label>
+            <input style="color:black" type="text" class="form-control" id="recipient-role" th:field="*{role}">
+          </div>
+          <div class="form-group">
+            <label style="top:-20px"  class="col-form-label">Customer:</label>
+            <select name="customer" class="form-select mt-3 w-100 text-center rounded border border-cus border-2" >
+              <option th:value="0"
+                      th:text="Null"/>
+              <option th:each="customer : ${customers}"
+                      th:value="${customer.id}"
+                      th:text="${customer.name}"/>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="top:-20px"  class="col-form-label">Brand:</label>
+            <select name="brand" class="form-select mt-3 w-100 text-center rounded border border-cus border-2" >
+              <option th:value="0"
+                      th:text="Null"/>
+              <option th:each="brand : ${brands}"
+                      th:value="${brand.id}"
+                      th:text="${brand.name}"/>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+  <!-- End Add Modal  -->
+
+  <!-- Edit Modal  -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <form th:action="@{/update-account}" method="put">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="editModalLabel" >Edit Account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="idEdit" style="top:-20px" class="col-form-label">ID:</label>
+              <input style="color:black" type="text" class="form-control" id="idEdit" readonly name="id">
+            </div>            <div class="form-group">
+              <label for="unameEdit" style="top:-20px" class="col-form-label">UserName:</label>
+              <input style="color:black" type="text" class="form-control" id="unameEdit" name="username">
+            </div>
+            <div class="form-group">
+              <label for="passwordEdit" style="top:-20px"  class="col-form-label">Password:</label>
+              <input style="color:black" type="text" class="form-control" id="passwordEdit" name="password">
+            </div>
+            <div class="form-group">
+              <label for="roleEdit" style="top:-20px"  class="col-form-label">Role:</label>
+              <input style="color:black" type="text" class="form-control" id="roleEdit" name="role">
+            </div>
+            <div class="form-group">
+              <label for="customerEdit" style="top:-20px"  class="col-form-label">Customer:</label>
+              <input style="color:black" type="text" class="form-control" id="customerEdit" name="customer">
+            </div>
+            <div class="form-group">
+              <label for="brandEdit" style="top:-20px"  class="col-form-label">Brand:</label>
+              <input style="color:black" type="text" class="form-control" id="brandEdit" name="brand">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- End Edit Modal  -->
+
+  <div th:replace="fragments :: fixed-plugin"></div>
+  <div th:replace="fragments :: script"></div>
+  <script type="text/javascript" th:inline="javascript">
+    $(document).ready(function() {
+      var html = sessionStorage.getItem("notify") == null ?
+              "<a class=\"dropdown-item\" href=\"javascript:void(0)\">Login successful</a>\n" :
+              sessionStorage.getItem("notify");
+      $('#notifications').html(html);
+      $('.notification').html($('#notifications').children().length);
+
+      // sessionStorage.setItem("notify", $('.dropdown-menu').html());
+      $('table #editBtn').on('click', function (event){
+        event.preventDefault();
+        var href= $(this).attr('href');
+        $.get(href, function (account, status){
+          $('#idEdit').val(account.id);
+          $('#unameEdit').val(account.username);
+          $('#passwordEdit').val(account.password);
+          $('#roleEdit').val(account.role);
+          $('#customerEdit').val(account.customer.id);
+          $('#brandEdit').val(account.brand.id);
+
+        })
+        $('#editModal').modal();
+
+      })
+
+      var message = [[${message}]]
+      if (message !== null && message !== '') {
+        html = sessionStorage.getItem("notify") == null ?
+                "<a class=\"dropdown-item\" href=\"javascript:void(0)\">Login successful</a>\n" :
+                sessionStorage.getItem("notify");
+        var html_message = "<a class=\"dropdown-item\" href=\"javascript:void(0)\">"+ message +"</a>"
+        html += html_message
+        $('#notifications').html(html);
+        $('.notification').html($('#notifications').children().length);
+
+        sessionStorage.clear();
+        sessionStorage.setItem("notify", html);
+
+        $.notify({
+          // options
+          title: '<strong>Notification</strong>',
+          message: "" + message,
+          icon: 'add_alert',
+        },{
+          // settings
+          element: 'body',
+          position: null,
+          type: "info",
+          allow_dismiss: true,
+          newest_on_top: false,
+          showProgressbar: false,
+          placement: {
+            from: "top",
+            align: "right"
+          },
+          offset: 20,
+          spacing: 10,
+          z_index: 1031,
+          delay: 3300,
+          timer: 1000,
+          url_target: '_blank',
+          mouse_over: null,
+          animate: {
+            enter: 'animated rollIn',
+            exit: 'animated rollOut'
+          },
+          onShow: null,
+          onShown: null,
+          onClose: null,
+          onClosed: null,
+          icon_type: 'class',
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

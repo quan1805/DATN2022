@@ -11,7 +11,7 @@ public class LoginController {
     public String showLogin(Model model,
                             @RequestParam(required = false) String error){
         model.addAttribute("error", error);
-        return "/login";
+        return "login";
     }
 
 //    @RequestMapping("/manager")

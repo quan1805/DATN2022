@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments_brand :: header">
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+    <!-- Sidebar -->
+    <div th:replace="fragments_brand :: sidebar"></div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:replace="fragments_brand :: navbar" ></nav>
+      <!-- End Navbar -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title">View Order</h4>
+<!--                                <p class="card-category">Complete your profile</p>-->
+                            </div>
+                            <div class="card-body">
+                                <form  method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Order Id</label>
+                                                <input type="text" th:value="${order.id}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Message</label>
+                                                <input type="text" th:value="${order.message}" class="form-control">
+                                            </div>
+                                        </div>
+<!--                                        <div class="col-md-6">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="bmd-label-floating">Brand</label>-->
+<!--                                                <input type="text" th:value="${order.brand.name}" class="form-control">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Create Date</label>
+                                                <input type="text" class="form-control" th:value="${order.createDate}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Update Date</label>
+                                                <input type="text" class="form-control" th:value="${order.updateDate}" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+<!--                                        <div class="col-md-6">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="">Delivery Date</label>-->
+<!--                                                <input type="text" class="form-control" th:value="${order.deliveryDate}" >-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="">Discount</label>
+                                                <input type="text" class="form-control" th:value="${order.discount}" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="">Note</label>
+                                                <input type="text" class="form-control" th:value="${order.note}" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h4 class="card-title ">Order Detail List</h4>
+<!--                                        <p class="card-category"> Here is a subtitle for this table</p>-->
+                                    </div>
+                                    <div class="col-md-8 text-right">
+                                        <!--                        <a th:href = "@{'/manage_add_productdetail'(productId=${product.id})}" class="btn btn-success"><i class="material-icons">&#xE147;</i></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                        <th>ID</th>
+                                        <th>Product</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="orderDetail : ${orderDetails}">
+                                            <td th:utext="${orderDetail.id}"></td>
+                                            <td th:utext="${orderDetail.productDetail.product.name}"></td>
+                                            <td th:utext="${orderDetail.productDetail.size}"></td>
+                                            <td th:utext="${orderDetail.quantity}"></td>
+                                            <td th:utext="${orderDetail.productDetail.promotionPrice}"></td>
+                                            <td th:utext="${orderDetail.price}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <a  class="btn btn-primary pull-right" th:text="${order.total}"></a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!--        <footer th:replace="fragments :: footer"></footer>-->
+      <script>
+        const x = new Date().getFullYear();
+        let date = document.getElementById('date');
+        date.innerHTML = '&copy; ' + x + date.innerHTML;
+      </script>
+    </div>
+  </div>
+
+
+  <div th:replace="fragments_brand :: fixed-plugin"></div>
+  <div th:replace="fragments_brand :: script"></div>
+  <script type="text/javascript" th:inline="javascript">
+    $(document).ready(function() {
+        $('input[type="file"]').change(function(e){
+            var value = $("input[type='file']").val();
+            value =  value.split(/(\\|\/)/g).pop()
+            console.log("value: " + value)
+            $('.js-value').text(value);
+
+
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    $('#image-product').src = "hhhhhhhh"+reader.result;
+                    document.getElementById("image-product").src = ""+reader.result;
+                }
+            }
+
+        });
+
+
+      var html = sessionStorage.getItem("notify") == null ?
+              "<a class=\"dropdown-item\" href=\"javascript:void(0)\">Login successful</a>\n" :
+              sessionStorage.getItem("notify");
+      $('#notifications').html(html);
+      $('.notification').html($('#notifications').children().length);
+
+      // sessionStorage.setItem("notify", $('.dropdown-menu').html());
+      $('table #editBtn').on('click', function (event){
+        event.preventDefault();
+        var href= $(this).attr('href');
+        $.get(href, function (category, status){
+          $('#idEdit').val(category.id);
+          $('#nameEdit').val(category.name);
+          $('#parentIdEdit').val(category.parentID);
+        })
+        $('#editModal').modal();
+
+      })
+
+      var message = [[${message}]]
+      if (message !== null && message !== '') {
+        html = sessionStorage.getItem("notify") == null ?
+                "<a class=\"dropdown-item\" href=\"javascript:void(0)\">Login successful</a>\n" :
+                sessionStorage.getItem("notify");
+        var html_message = "<a class=\"dropdown-item\" href=\"javascript:void(0)\">"+ message +"</a>"
+        html += html_message
+        $('#notifications').html(html);
+        $('.notification').html($('#notifications').children().length);
+
+        sessionStorage.clear();
+        sessionStorage.setItem("notify", html);
+
+        $.notify({
+          // options
+          title: '<strong>Notification</strong>',
+          message: "" + message,
+          icon: 'add_alert',
+        },{
+          // settings
+          element: 'body',
+          position: null,
+          type: "info",
+          allow_dismiss: true,
+          newest_on_top: false,
+          showProgressbar: false,
+          placement: {
+            from: "top",
+            align: "right"
+          },
+          offset: 20,
+          spacing: 10,
+          z_index: 1031,
+          delay: 3300,
+          timer: 1000,
+          url_target: '_blank',
+          mouse_over: null,
+          animate: {
+            enter: 'animated rollIn',
+            exit: 'animated rollOut'
+          },
+          onShow: null,
+          onShown: null,
+          onClose: null,
+          onClosed: null,
+          icon_type: 'class',
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

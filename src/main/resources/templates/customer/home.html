@@ -1,10 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
 
+<head th:replace="fragments_cus::head">
+</head>
+
+<body>
+    <div th:replace="fragments_cus::main-top" >
+    </div>
+    <!-- End Main Top -->
+
+    <!-- Start Main Top -->
+    <header th:replace="fragments_cus::main-header">
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div th:replace="fragments_cus::top-search">
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    <div id="slides-shop" class="cover-slides">
+        <ul class="slides-container">
+            <li class="text-center">
+                <img src="images/banner01.jpg" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> LOFA</strong></h1>
+                            <p class="m-b-40">LEVEL UP YOUR STYLE</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="images/banner04.jpg" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To  <br> LOFA </strong></h1>
+                            <p class="m-b-40">LEVEL UP YOUR STYLE</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="images/banner05.jpg" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To  <br> LOFA </strong></h1>
+                            <p class="m-b-40">LEVEL UP YOUR STYLE</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="slides-navigation">
+            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <!-- End Slider -->
+
+   
+
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="../images/lofa02.png" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top">We are <span>LOFA</span></h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sint iusto,
+                        reiciendis et voluptas id mollitia sequi debitis corporis temporibus aut porro hic.
+                        Nam sit ipsa consequuntur eligendi animi! Assumenda.</p>
+                    <p>Expedita sint iusto, reiciendis et voluptas id mollitia sequi debitis corporis temporibus aut porro hic.</p>
+					<p>Nam sit ipsa consequuntur eligendi animi! Assumenda.Expedita sint iusto,
+                        reiciendis et voluptas id mollitia sequi debitis corporis temporibus aut porro hic.
+                        Nam sit ipsa consequuntur eligendi animi! Assumenda.</p>
+                    <a class="btn hvr-hover" href="#">Read More</a>
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="service-block-inner">
+                        <h3>ĐỊNH VỊ VÀ NÂNG TẦM THƯƠNG HIỆU</h3>
+                        <p>LOFA là sàn thương mại điện tử dành cho giới trẻ đầu tiên lớn nhất ở Việt Nam, với gần 300 thương hiệu đang hợp tác. </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="service-block-inner">
+                        <h3>QUẢN LÝ BÁN HÀNG CHUYÊN NGHIỆP</h3>
+                        <p>Trang quản lý cập nhật sản phẩm, kho hàng và đơn hàng, theo dõi doanh thu trực tiếp, giao diện dễ thao tác và nhanh chóng, đối soát liên tục, liên kết với giao hàng chuyên nghiệp với GHTK.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="service-block-inner">
+                        <h3>TIẾP CẬN TẬP KHÁCH HÀNG KHỔNG LỒ</h3>
+                        <p>Website với hơn 2 triệu lượt truy cập mỗi tháng, hệ sinh thái Media tương tác cao với Fanpage Facebook lên đến nữa triệu lượt like. Hướng thẳng mục tiêu đến đối tượng giới trẻ, 90% ở độ tuổi từ 16-24.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+
+    <!-- Start Feed  -->
+    <div th:replace="fragments_cus::instagram-box" >
+    </div>
+    
+    <!-- End Feed  -->
+
+
+    <!-- Start Footer  -->
+    <footer th:replace="fragments_cus::footer">
+    </footer>
+            
+
+    <!-- ALL JS FILES -->
+    <div th:replace="fragments_cus::script"></div>
 </body>
+
 </html>

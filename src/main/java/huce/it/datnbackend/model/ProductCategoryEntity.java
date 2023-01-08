@@ -12,14 +12,14 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Table(name = "productcategory")
+@Table(name = "productcategory", uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class ProductCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "parentid")

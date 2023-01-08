@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
   <meta charset="utf-8" />
@@ -18,6 +19,68 @@
   <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <style>
+    .filupp > input[type=file] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .filupp {
+      position: relative;
+      background: #242424;
+      display: block;
+      padding: 1em;
+      font-size: 1em;
+      width: 100%;
+      height: 3.5em;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 1px 3px #0b0b0b;
+    }
+
+    .filupp:before {
+      content: "";
+      position: absolute;
+      top: 1.5em;
+      right: 0.75em;
+      width: 2em;
+      height: 1.25em;
+      border: 3px solid #dd4040;
+      border-top: 0;
+      text-align: center;
+    }
+
+    .filupp:after {
+      content: "➜";
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      position: absolute;
+      top: 0.65em;
+      right: 0.45em;
+      font-size: 2em;
+      color: #dd4040;
+      line-height: 0;
+    }
+
+    .filupp-file-name {
+      width: 75%;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: normal;
+    }
+  </style>
 </head>
 
 <body class="dark-edition">
@@ -155,7 +218,7 @@
                   <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                  <form th:action="@{/save_product_action}" method="post">
+                  <form th:action="@{/save_product_action}" method="post" enctype="multipart/form-data">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
@@ -172,10 +235,18 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Image</label>
-                          <input type="text" class="form-control" name="image" required>
-                        </div>
+                        <label for="custom-file-upload" class="filupp">
+                          <span class="filupp-file-name js-value">Image Product</span>
+                          <input type="file" name="images" id="custom-file-upload"/>
+                        </label>
+<!--                        <div class="">-->
+<!--                          <input type="file" name="images" class="custom-file-input" multiple>-->
+<!--                          <label class="custom-file-label">Đính kèm tệp</label>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                          <label class="bmd-label-floating">Image</label>-->
+<!--                          <input type="file" class="form-control" name="image" required multiple>-->
+<!--                        </div>-->
                       </div>
                     </div>
                     <div class="row">
@@ -239,7 +310,7 @@
               <div class="card card-profile">
                 <div class="card-avatar">
                   <a href="#pablo">
-                    <img class="img" src="../assets/img/faces/marc.jpg" />
+                    <img id="image-product" class="img" src="../assets/img/faces/marc.jpg" />
                   </a>
                 </div>
                 <div class="card-body">
@@ -382,6 +453,27 @@
   <script>
     $(document).ready(function() {
       $().ready(function() {
+        $('input[type="file"]').change(function(e){
+          var value = $("input[type='file']").val();
+          value =  value.split(/(\\|\/)/g).pop()
+          console.log("value: " + value)
+          $('.js-value').text(value);
+
+
+          var input = e.target;
+          if (input.files && input.files[0]) {
+            var file = input.files[0];
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+              $('#image-product').src = "hhhhhhhh"+reader.result;
+              document.getElementById("image-product").src = ""+reader.result;
+            }
+          }
+
+        });
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');

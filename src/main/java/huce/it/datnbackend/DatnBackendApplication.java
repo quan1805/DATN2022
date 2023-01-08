@@ -13,12 +13,6 @@ public class DatnBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DatnBackendApplication.class, args);
 	}
-
-	@GetMapping("/home")
-	public String Homepage(){
-		return "/homepage/home";
-	}
-//
 //	@GetMapping
 //	public String Hello() {
 //		return "DATN2022";

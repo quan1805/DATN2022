@@ -1,6 +1,7 @@
 package huce.it.datnbackend.controller;
 
 import huce.it.datnbackend.services.account.IAccountService;
+import huce.it.datnbackend.services.brand.IBrandService;
 import huce.it.datnbackend.services.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,12 @@ import java.util.ArrayList;
 public class CoreController {
     @Autowired
     private IAccountService accountService;
+
+    @Autowired
+    private IBrandService brandService;
+
+    @Autowired
+    private ICustomerService customerService;
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
@@ -40,20 +47,20 @@ public class CoreController {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         ArrayList<GrantedAuthority> grantedAuthorityList = new ArrayList<>(loginedUser.getAuthorities());
-        session.setAttribute("user",accountService.getAccountByUsername(loginedUser.getUsername()));
+//        session.setAttribute("user",accountService.getAccountByUsername(loginedUser.getUsername()));
         switch (grantedAuthorityList.get(0).getAuthority()){
             case "ROLE_ADMIN":
-                return "redirect:/admin/home";
+                session.setAttribute("user",accountService.getAccountByUsername(loginedUser.getUsername()));
+                return "redirect:/brands/0";
             case "ROLE_MANAGER":
-                return "redirect:/manage_product";
+                int brandId =  accountService.getAccountByUsername(loginedUser.getUsername()).getBrand().getId();
+                session.setAttribute("user",brandService.getObjectById(brandId));
+                return "redirect:/brand-products/0";
             case "ROLE_CUSTOMER":
-                return "redirect:/customer/home";
+                int customerId =  accountService.getAccountByUsername(loginedUser.getUsername()).getCustomer().getId();
+                session.setAttribute("user",customerService.getObjectById(customerId));
+                return "redirect:/index";
         }
         return "";
     }
-    @RequestMapping(value = "/homepage", method = RequestMethod.GET)
-    public String HomePage() {
-        return "/homepage/home";
-    }
-
 }

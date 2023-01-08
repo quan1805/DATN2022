@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -46,5 +48,8 @@ public class BrandEntity {
 
     @Column(name = "status")
     private int status;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
+    private List<CartShopEntity> cartShop;
 
 }

@@ -27,11 +27,13 @@ public class AccountEntity {
     @Column(name = "role")
     private int role;
 
-    @Column(name = "customerid")
-    private int customerId;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 
-    @Column(name = "brandid")
-    private int brandId;
+    @OneToOne
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brand;
 
     @Column(name = "status")
     private int status;

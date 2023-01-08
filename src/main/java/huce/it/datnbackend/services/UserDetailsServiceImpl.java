@@ -52,7 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String passwordBcrypt = passwordEncoder.encode(user.getPassword());
         UserDetails userDetails = new User(user.getUsername(),
-                passwordBcrypt, grantList);
+                user.getPassword(), grantList);
         return userDetails;
 
     }

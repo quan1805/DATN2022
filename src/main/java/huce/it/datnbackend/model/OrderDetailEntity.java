@@ -17,11 +17,13 @@ public class OrderDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "productid")
-    private int productId;
+    @OneToOne
+    @JoinColumn(name = "ordershop_id")
+    private OrderShopEntity orderShop;
 
-    @Column(name = "productName")
-    private String productName;
+    @OneToOne
+    @JoinColumn(name = "productdetail_id")
+    private ProductDetailEntity productDetail;
 
     @Column(name = "price")
     private Double price;

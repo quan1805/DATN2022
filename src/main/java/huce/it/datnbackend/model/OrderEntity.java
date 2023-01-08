@@ -11,17 +11,18 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "customerid")
-    private String customerID;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 
-    @Column(name = "deliverydate")
-    private Timestamp deliveryDate;
+    @Column(name = "total")
+    private Double total;
 
     @Column(name = "discount")
     private int discount;
@@ -34,4 +35,7 @@ public class OrderEntity {
 
     @Column(name = "status")
     private int status;
+
+    @Column(name = "note")
+    private String note;
 }

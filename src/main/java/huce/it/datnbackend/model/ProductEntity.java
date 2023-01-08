@@ -49,4 +49,7 @@ public class ProductEntity {
     @Column(name = "status")
     private int status;
 
+    @Column(name = "price")
+    private Double price;
+
 }
